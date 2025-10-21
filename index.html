@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow – Smart Task Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>TaskFlow</h1>
+      <button id="theme-toggle">🌙</button>
+    </header>
+
+    <div class="task-inputs">
+      <input type="text" id="task-input" placeholder="Add a new task..." />
+      <select id="priority">
+        <option value="Planning">Planning</option>
+        <option value="Pending">Pending</option>
+        <option value="Completed">Completed</option>
+      </select>
+      <button id="add-task">Add</button>
+    </div>
+
+    <div class="filter-search">
+      <div class="filters">
+        <button data-filter="all" class="active">All</button>
+        <button data-filter="pending">Pending</button>
+        <button data-filter="completed">Completed</button>
+      </div>
+      <input type="text" id="search" placeholder="🔍 Search tasks..." />
+    </div>
+
+    <ul id="task-list"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
