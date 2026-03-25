@@ -1,79 +1,170 @@
-# Smart Task Manager
+# 🚀 Smart Task Manager (Full-Stack)
 
-A simple, elegant, and fully functional **Task Management Web App** built using only **HTML, CSS, and JavaScript** — no frameworks, no dependencies.  
-It helps you organize your day by adding, editing, deleting, searching, and marking tasks as complete — all stored in your browser’s **localStorage**.
+A modern, elegant, and fully functional **Full-Stack Task Management Web App** that helps users efficiently manage daily tasks with persistent storage and a responsive UI.
 
----
-
-## Live Demo
-
-
+Originally built as a frontend-only application, this project was **upgraded to a full-stack system** using **Node.js, Express, and MongoDB**, replacing localStorage with a scalable backend.
 
 ---
 
-## Features
+## 🌐 Live Demo
 
-✅ Add new tasks easily  
-✅ Mark tasks as completed or pending  
-✅ Delete tasks with a single click  
-✅ Filter tasks by status (All / Pending / Completed)  
-✅ Search tasks dynamically  
-✅ Persistent data using **localStorage**  
-✅ Responsive and modern UI  
-✅ Light/Dark theme toggle   
-✅ Smooth animations and minimalistic design  
+*(Add your deployed link here once available)*
 
 ---
 
-## Tech Stack
+## ✨ Features
 
-| Technology | Purpose |
-|-------------|----------|
-| **HTML5** | Structure & layout |
-| **CSS3 (Flexbox, Variables)** | Styling, layout, and dark mode |
-| **Vanilla JavaScript (ES6)** | Logic, DOM manipulation, localStorage |
+### 🎯 Core Features
+
+✅ Add new tasks easily
+✅ Mark tasks as completed or pending
+✅ Delete tasks with a single click
+✅ Filter tasks by status (All / Pending / Completed)
+✅ Search tasks dynamically
+
+### 🎨 UI/UX Features
+
+✅ Responsive and modern UI
+✅ Light/Dark theme toggle
+✅ Smooth animations and minimalistic design
+
+### ⚙️ Backend Features (NEW 🚀)
+
+✅ RESTful API integration
+✅ Persistent storage using MongoDB
+✅ Replace localStorage with database
+✅ Real-time data sync between frontend & backend
 
 ---
 
-## Folder Structure
+## 🧠 Tech Stack
+
+### 🎨 Frontend
+
+| Technology                | Purpose                      |
+| ------------------------- | ---------------------------- |
+| HTML5                     | Structure & layout           |
+| CSS3 (Flexbox, Variables) | Styling, layout, dark mode   |
+| Vanilla JavaScript (ES6)  | DOM manipulation & API calls |
+
+### ⚙️ Backend
+
+| Technology | Purpose             |
+| ---------- | ------------------- |
+| Node.js    | Runtime environment |
+| Express.js | Backend framework   |
+| MongoDB    | Database            |
+| Mongoose   | ODM for MongoDB     |
+
+---
+
+## 📁 Folder Structure
 
 ```
-
 smart-task-manager/
 │
-├── index.html         # Main HTML file
-├── style.css          # Styling for the UI
-├── script.js          # Core JavaScript logic
-└── README.md          # Project documentation
+├── client/              # Frontend
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+│
+├── backend/             # Backend
+│   ├── server.js
+│   ├── models/
+│   ├── routes/
+│   └── .env
+│
+└── README.md
+```
 
-````
+---
+
+## 🔌 API Endpoints
+
+| Method | Endpoint       | Description        |
+| ------ | -------------- | ------------------ |
+| GET    | /api/tasks     | Get all tasks      |
+| POST   | /api/tasks     | Create a new task  |
+| PUT    | /api/tasks/:id | Toggle task status |
+| DELETE | /api/tasks/:id | Delete a task      |
 
 ---
 
 ## ⚙️ How to Run Locally
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/smart-task-manager.git
-````
+### 1️⃣ Clone the repository
 
-2. **Navigate to the project folder**
+```bash
+git clone https://github.com/your-username/smart-task-manager.git
+cd smart-task-manager
+```
 
-   ```bash
-   cd smart-task-manager
-   ```
-3. **Open `index.html`** in your browser
-   (No server setup required — it’s a pure frontend app)
+---
+
+### 2️⃣ Setup Backend
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+---
+
+### 3️⃣ Run Frontend
+
+* Open `client/index.html` using **Live Server**
+
+---
+
+## 🔄 Project Evolution
+
+This project was enhanced from:
+
+➡️ **Frontend-only (localStorage-based)**
+➡️ **Full-stack application with database & APIs**
+
+Key improvements:
+
+* Introduced backend architecture
+* Implemented REST APIs
+* Migrated from localStorage → MongoDB
+* Enabled persistent and scalable data handling
 
 ---
 
 ## 💡 Future Enhancements
 
-* ✏️ Edit existing tasks
+* 🔐 User authentication (JWT)
 * 📅 Add due dates and reminders
-* 📊 Dashboard summary (Total / Completed / Pending count)
-* ☁️ Cloud sync using APIs
-* 📱 Mobile-first enhanced responsive layout
+* 📊 Dashboard analytics (Total / Completed / Pending)
+* ☁️ Cloud database (MongoDB Atlas)
+* 🌍 Full deployment (Render + Netlify)
+* 📱 Mobile-first UI improvements
 
 ---
 
+## 🧠 Learning Outcomes
+
+* Built RESTful APIs using Express
+* Integrated frontend with backend
+* Managed data using MongoDB
+* Understood full-stack architecture and data flow
+
+---
+
+## 🤝 Contribution
+
+Feel free to fork this repo and improve it!
+
+---
+
+## 📌 Author
+
+**Your Name**
+
+---
+
+## ⭐ If you like this project
+
+Give it a ⭐ on GitHub — it helps!
