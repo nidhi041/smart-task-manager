@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskFlow – Own Your Day</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Inter', 'sans-serif'] },
+            colors: {
+              gold: { DEFAULT: '#c9a84c', light: '#f0d080' },
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+    <style>
+
+      /* ══════════════════════════════════════
+         THEME TOKENS
+      ══════════════════════════════════════ */
+      :root, [data-theme="dark"] {
+        --bg:            #07070d;
+        --bg2:           #0d0d18;
+        --card-bg:       rgba(14,14,24,0.92);
+        --surface-bg:    rgba(22,22,38,0.85);
+        --navbar-bg:     rgba(7,7,13,0.88);
+        --text:          #ede9e0;
+        --text-muted:    rgba(237,233,224,0.42);
+        --border:        rgba(201,168,76,0.14);
+        --border-input:  rgba(201,168,76,0.22);
+        --placeholder:   rgba(237,233,224,0.32);
+        --orb-opacity:   0.13;
+        --task-bg:       rgba(22,22,38,0.7);
+        --task-border:   rgba(201,168,76,0.1);
+        --select-opt:    #0e0e18;
+        --shadow-card:   0 32px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(201,168,76,0.08) inset;
+        --shadow-hover:  0 16px 48px rgba(0,0,0,0.5);
+      }
+
+      [data-theme="light"] {
+        --bg:            #f7f2ea;
+        --bg2:           #ede8de;
+        --card-bg:       rgba(255,253,248,0.96);
+        --surface-bg:    rgba(242,237,226,0.92);
+        --navbar-bg:     rgba(247,242,234,0.94);
+        --text:          #18140d;
+        --text-muted:    rgba(24,20,13,0.48);
+        --border:        rgba(201,168,76,0.22);
+        --border-input:  rgba(201,168,76,0.32);
+        --placeholder:   rgba(24,20,13,0.32);
+        --orb-opacity:   0.06;
+        --task-bg:       rgba(255,253,248,0.85);
+        --task-border:   rgba(201,168,76,0.18);
+        --select-opt:    #f7f2ea;
+        --shadow-card:   0 20px 60px rgba(0,0,0,0.1), 0 0 0 1px rgba(201,168,76,0.12) inset;
+        --shadow-hover:  0 10px 30px rgba(0,0,0,0.1);
+      }
+
+      /* ══════════════════════════════════════
+         BASE
+      ══════════════════════════════════════ */
+      *, *::before, *::after { box-sizing: border-box; }
+
+      body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        transition: background-color 0.35s ease, color 0.35s ease;
+        min-height: 100vh;
+      }
+
+      /* Subtle grid texture overlay */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background-image:
+          linear-gradient(rgba(201,168,76,0.025) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(201,168,76,0.025) 1px, transparent 1px);
+        background-size: 48px 48px;
+      }
+
+      /* ══════════════════════════════════════
+         AMBIENT ORBS
+      ══════════════════════════════════════ */
+      .orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(90px);
+        opacity: var(--orb-opacity);
+        pointer-events: none;
+        z-index: 0;
+        animation: orbFloat 14s ease-in-out infinite;
+      }
+      @keyframes orbFloat {
+        0%,100% { transform: translate(0,0) scale(1); }
+        33%      { transform: translate(20px,-30px) scale(1.04); }
+        66%      { transform: translate(-15px,15px) scale(0.97); }
+      }
+
+      /* ══════════════════════════════════════
+         GOLD UTILITIES
+      ══════════════════════════════════════ */
+      .gold-text {
+        background: linear-gradient(135deg, #c9a84c 0%, #f0d080 50%, #c9a84c 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: goldShimmer 4s linear infinite;
+      }
+      @keyframes goldShimmer {
+        0%   { background-position: 0% center; }
+        100% { background-position: 200% center; }
+      }
+
+      .gold-btn {
+        background: linear-gradient(135deg, #b8922e, #c9a84c, #f0d080, #c9a84c);
+        background-size: 200% auto;
+        color: #07070d;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        transition: all 0.35s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .gold-btn::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.18) 60%, transparent 70%);
+        transform: translateX(-100%);
+        transition: transform 0.5s ease;
+      }
+      .gold-btn:hover::after { transform: translateX(100%); }
+      .gold-btn:hover {
+        background-position: right center;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(201,168,76,0.45), 0 0 0 1px rgba(201,168,76,0.3);
+      }
+      .gold-btn:active { transform: translateY(0); }
+
+      /* ══════════════════════════════════════
+         CARD
+      ══════════════════════════════════════ */
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        box-shadow: var(--shadow-card);
+        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+      }
+      .card:hover { border-color: rgba(201,168,76,0.22); }
+
+      /* ══════════════════════════════════════
+         NAVBAR
+      ══════════════════════════════════════ */
+      .navbar {
+        background: var(--navbar-bg);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-link { color: var(--text-muted); transition: color 0.2s; }
+      .nav-link:hover { color: #f0d080; }
+      .nav-muted { color: var(--text-muted); }
+      .theme-toggle-btn {
+        border: 1px solid var(--border-input);
+        background: var(--surface-bg);
+        color: var(--text);
+        transition: all 0.3s ease;
+      }
+      .theme-toggle-btn:hover {
+        border-color: #c9a84c;
+        box-shadow: 0 0 14px rgba(201,168,76,0.25);
+      }
+
+      /* ══════════════════════════════════════
+         INPUTS
+      ══════════════════════════════════════ */
+      .input-field {
+        background: var(--surface-bg);
+        border: 1px solid var(--border-input);
+        color: var(--text);
+        transition: all 0.3s ease;
+        font-family: 'Inter', sans-serif;
+      }
+      .input-field:focus {
+        outline: none;
+        border-color: #c9a84c;
+        box-shadow: 0 0 0 3px rgba(201,168,76,0.14), 0 0 20px rgba(201,168,76,0.08);
+      }
+      .input-field::placeholder { color: var(--placeholder); }
+      select.input-field option  { background: var(--select-opt); color: var(--text); }
+
+      /* ══════════════════════════════════════
+         TASK ROW
+      ══════════════════════════════════════ */
+      .task-row {
+        background: var(--task-bg);
+        border: 1px solid var(--task-border);
+        transition: all 0.25s ease;
+      }
+      .task-row:hover {
+        border-color: rgba(201,168,76,0.28);
+        transform: translateX(3px);
+        box-shadow: -3px 0 0 #c9a84c, var(--shadow-hover);
+      }
+
+      /* ══════════════════════════════════════
+         HOVER LIFT (stat cards)
+      ══════════════════════════════════════ */
+      .hover-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+      .hover-lift:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+
+      /* ══════════════════════════════════════
+         ANIMATIONS
+      ══════════════════════════════════════ */
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(24px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .fade-up { animation: fadeUp 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateX(-14px); }
+        to   { opacity: 1; transform: translateX(0); }
+      }
+      .slide-in { animation: slideIn 0.38s cubic-bezier(0.22,1,0.36,1) both; }
+
+      @keyframes popIn {
+        0%   { opacity: 0; transform: scale(0.85); }
+        70%  { transform: scale(1.04); }
+        100% { opacity: 1; transform: scale(1); }
+      }
+      .pop-in { animation: popIn 0.45s cubic-bezier(0.22,1,0.36,1) both; }
+
+      /* ══════════════════════════════════════
+         SCROLLBAR
+      ══════════════════════════════════════ */
+      ::-webkit-scrollbar { width: 5px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.25); border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.5); }
+
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

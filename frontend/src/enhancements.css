@@ -1,0 +1,311 @@
+/* ============================================================
+   TASKFLOW — PREMIUM UI ENHANCEMENTS
+   Plain CSS only. No Tailwind. No libraries.
+   Import this in main.jsx after index.css.
+   ============================================================ */
+
+/* ── 1. STAT CARD HOVER INTERACTIONS ──────────────────────── */
+
+/* Base card transition (extends existing .card) */
+.stat-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid rgba(201, 168, 76, 0.14);
+  will-change: transform;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+/* ── 2. PER-CARD COLOR GLOW ────────────────────────────────── */
+
+.stat-card.card-total:hover {
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.4),
+    0 0 24px rgba(96, 165, 250, 0.22),   /* soft blue */
+    0 0  8px rgba(96, 165, 250, 0.12);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+.stat-card.card-pending:hover {
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.4),
+    0 0 24px rgba(249, 115, 22, 0.25),   /* orange */
+    0 0  8px rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+.stat-card.card-completed:hover {
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.4),
+    0 0 24px rgba(52, 211, 153, 0.25),   /* green */
+    0 0  8px rgba(52, 211, 153, 0.12);
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+.stat-card.card-productivity:hover {
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.4),
+    0 0 24px rgba(201, 168, 76, 0.35),   /* golden */
+    0 0  8px rgba(201, 168, 76, 0.18);
+  border-color: rgba(201, 168, 76, 0.4);
+}
+
+/* Light theme adjustments — softer shadows */
+[data-theme="light"] .stat-card.card-total:hover     { box-shadow: 0 10px 30px rgba(0,0,0,0.1), 0 0 20px rgba(96,165,250,0.18); }
+[data-theme="light"] .stat-card.card-pending:hover   { box-shadow: 0 10px 30px rgba(0,0,0,0.1), 0 0 20px rgba(249,115,22,0.18); }
+[data-theme="light"] .stat-card.card-completed:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.1), 0 0 20px rgba(52,211,153,0.18); }
+[data-theme="light"] .stat-card.card-productivity:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.1), 0 0 20px rgba(201,168,76,0.28); }
+
+
+/* ── 3. INSIGHT LINE ANIMATION ─────────────────────────────── */
+
+@keyframes insightFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.insight-line {
+  animation: insightFadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+
+/* ── 4. PROGRESS BAR SHINE ─────────────────────────────────── */
+
+.progress-track {
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+  height: 8px;
+  background: var(--surface-bg);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #c9a84c, #f0d080);
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shine sweep on the fill bar */
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  animation: progressShine 2.5s ease-in-out infinite;
+}
+
+@keyframes progressShine {
+  0%   { left: -60%; }
+  60%  { left: 120%; }
+  100% { left: 120%; }
+}
+
+
+/* ── 5. BUTTON INTERACTIONS ────────────────────────────────── */
+
+/* Generic action button (filter pills, etc.) */
+.btn-action {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-action:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(201, 168, 76, 0.2);
+}
+
+.btn-action:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Delete button glow on hover */
+.btn-delete:hover {
+  transform: scale(1.15) !important;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.35) !important;
+}
+
+/* Toggle (complete) button pulse when active */
+.btn-toggle-complete {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.btn-toggle-complete:hover {
+  transform: scale(1.15);
+}
+
+.btn-toggle-complete.is-done {
+  animation: completePulse 0.4s ease;
+}
+
+@keyframes completePulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.3); }
+  70%  { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+
+/* ── 6. TASK ROW PREMIUM FEEL ──────────────────────────────── */
+
+/* Staggered entrance already handled by slide-in + animationDelay.
+   Add a subtle left-accent line that grows on hover. */
+.task-row {
+  position: relative;
+}
+
+.task-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, #c9a84c, #f0d080);
+  opacity: 0;
+  transform: scaleY(0.4);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.task-row:hover::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+
+/* ── 7. MAIN CARD SUBTLE DEPTH ─────────────────────────────── */
+
+.main-card {
+  transition: box-shadow 0.35s ease;
+}
+
+.main-card:hover {
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(201, 168, 76, 0.18) inset;
+}
+
+[data-theme="light"] .main-card:hover {
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(201, 168, 76, 0.22) inset;
+}
+
+/* ── 8. GRADIENT SWEEP ON HOVER (::after) ──────────────────── */
+
+/*
+  A light gradient band slides left → right across the card on hover.
+  Uses ::after so it never conflicts with ::before (used for task-row accent).
+  overflow: hidden is already set on .stat-card via .card (backdrop-filter cards).
+*/
+
+.stat-card {
+  overflow: hidden; /* ensure sweep is clipped to card bounds */
+}
+
+/* The sweep layer — hidden by default, off to the left */
+.stat-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Narrow bright band sitting off the left edge */
+  background: linear-gradient(
+    105deg,
+    transparent  0%,
+    transparent  35%,
+    rgba(255, 255, 255, 0.07) 50%,
+    transparent  65%,
+    transparent  100%
+  );
+  transform: translateX(-100%);
+  transition: none; /* controlled by animation, not transition */
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Trigger the sweep on hover */
+.stat-card:hover::after {
+  animation: gradientSweep 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes gradientSweep {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+/* ── Per-card tinted sweeps ─────────────────────────────────── */
+
+/* Completed → green tint */
+.stat-card.card-completed::after {
+  background: linear-gradient(
+    105deg,
+    transparent  0%,
+    transparent  30%,
+    rgba(52, 211, 153, 0.12) 48%,
+    rgba(255, 255, 255, 0.06) 52%,
+    transparent  70%,
+    transparent  100%
+  );
+}
+
+/* Pending → orange tint */
+.stat-card.card-pending::after {
+  background: linear-gradient(
+    105deg,
+    transparent  0%,
+    transparent  30%,
+    rgba(249, 115, 22, 0.13) 48%,
+    rgba(255, 255, 255, 0.06) 52%,
+    transparent  70%,
+    transparent  100%
+  );
+}
+
+/* Productivity → gold tint */
+.stat-card.card-productivity::after {
+  background: linear-gradient(
+    105deg,
+    transparent  0%,
+    transparent  30%,
+    rgba(201, 168, 76, 0.18) 48%,
+    rgba(255, 255, 255, 0.08) 52%,
+    transparent  70%,
+    transparent  100%
+  );
+}
+
+/* Total → blue tint (matches existing glow) */
+.stat-card.card-total::after {
+  background: linear-gradient(
+    105deg,
+    transparent  0%,
+    transparent  30%,
+    rgba(96, 165, 250, 0.12) 48%,
+    rgba(255, 255, 255, 0.06) 52%,
+    transparent  70%,
+    transparent  100%
+  );
+}
+
+/* Light theme — slightly stronger sweep (cards are lighter so effect needs more opacity) */
+[data-theme="light"] .stat-card.card-completed::after    { background: linear-gradient(105deg, transparent 0%, transparent 30%, rgba(52,211,153,0.18) 48%, rgba(255,255,255,0.12) 52%, transparent 70%, transparent 100%); }
+[data-theme="light"] .stat-card.card-pending::after      { background: linear-gradient(105deg, transparent 0%, transparent 30%, rgba(249,115,22,0.18) 48%, rgba(255,255,255,0.12) 52%, transparent 70%, transparent 100%); }
+[data-theme="light"] .stat-card.card-productivity::after { background: linear-gradient(105deg, transparent 0%, transparent 30%, rgba(201,168,76,0.22) 48%, rgba(255,255,255,0.14) 52%, transparent 70%, transparent 100%); }
+[data-theme="light"] .stat-card.card-total::after        { background: linear-gradient(105deg, transparent 0%, transparent 30%, rgba(96,165,250,0.18) 48%, rgba(255,255,255,0.12) 52%, transparent 70%, transparent 100%); }
