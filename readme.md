@@ -1,4 +1,4 @@
-# 🚀 Smart Task Manager (Full-Stack + Analytics)
+# Smart Task Manager (Full-Stack + Analytics)
 
 A **modern, full-stack productivity web app** designed to help users manage tasks, track performance, and build consistency using **streaks, analytics, and smart insights**.
 
@@ -6,65 +6,65 @@ Originally built using **HTML, CSS, and JavaScript**, this project was later **u
 
 ---
 
-## 🌐 Live Demo
+## Live Demo
 
-🔗 *(Add your deployed link here)*
-👤 Demo Credentials: *(optional)*
-
----
-
-## ✨ Features
-
-### 🎯 Core Task Management
-
-* ✅ Add, update, and delete tasks
-* ✅ Categorize tasks: **Planning / Pending / Completed**
-* ✅ Real-time task updates
-* ✅ Search and filter tasks dynamically
+*(Add your deployed link here)*
+Demo Credentials: *(optional)*
 
 ---
 
-### 📊 Productivity & Analytics (🔥 Highlight)
+## Features
 
-* 📈 Weekly & Monthly performance reports
-* 📊 Visual charts for task completion trends
-* 🔥 Streak tracking system for consistency
-* 💯 Productivity Score calculation
-* 🧠 Smart insights based on user activity
+### Core Task Management
 
----
-
-### 🎨 UI/UX Experience
-
-* 🎯 Clean, minimal, and modern dashboard
-* 🌗 Light / Dark mode toggle
-* ✨ Smooth animations and transitions
-* 📱 Fully responsive design
-* 🎯 Empty state handling for better UX
+*  Add, update, and delete tasks
+*  Categorize tasks: **Planning / Pending / Completed**
+*  Real-time task updates
+*  Search and filter tasks dynamically
 
 ---
 
-### 🔐 Authentication & User System
+###  Productivity & Analytics (Highlight)
 
-* ✅ User signup & login
-* ✅ Personalized dashboard per user
-* ✅ Profile management (name, image, etc.)
-* ✅ Secure session handling
-
----
-
-### ⚙️ Backend & System Features
-
-* 🔗 RESTful API architecture
-* 🗄 MongoDB database integration
-* 🔄 Persistent data (no localStorage)
-* ⚡ Scalable backend with Express.js
+*  Weekly & Monthly performance reports
+*  Visual charts for task completion trends
+*  Streak tracking system for consistency
+*  Productivity Score calculation
+*  Smart insights based on user activity
 
 ---
 
-## 🧠 Tech Stack
+### UI/UX Experience
 
-### 🎨 Frontend
+*  Clean, minimal, and modern dashboard
+*  Light / Dark mode toggle
+*  Smooth animations and transitions
+*  Fully responsive design
+*  Empty state handling for better UX
+
+---
+
+### Authentication & User System
+
+*  User signup & login
+*  Personalized dashboard per user
+*  Profile management (name, image, etc.)
+*  Secure session handling
+
+---
+
+### Backend & System Features
+
+*  RESTful API architecture
+*  MongoDB database integration
+*  Persistent data (no localStorage)
+*  Scalable backend with Express.js
+
+---
+
+## Tech Stack
+
+### Frontend
 
 | Technology          | Purpose                     |
 | ------------------- | --------------------------- |
@@ -75,7 +75,7 @@ Originally built using **HTML, CSS, and JavaScript**, this project was later **u
 
 ---
 
-### ⚙️ Backend
+### Backend
 
 | Technology | Purpose             |
 | ---------- | ------------------- |
@@ -86,7 +86,7 @@ Originally built using **HTML, CSS, and JavaScript**, this project was later **u
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```
 smart-task-manager/
@@ -109,7 +109,7 @@ smart-task-manager/
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 | Method | Endpoint       | Description   |
 | ------ | -------------- | ------------- |
@@ -120,9 +120,9 @@ smart-task-manager/
 
 ---
 
-## ⚙️ How to Run Locally
+## How to Run Locally
 
-### 1️⃣ Clone Repository
+### 1️. Clone Repository
 
 ```bash
 git clone https://github.com/your-username/smart-task-manager.git
@@ -131,7 +131,7 @@ cd smart-task-manager
 
 ---
 
-### 2️⃣ Setup Backend
+### 2️. Setup Backend
 
 ```bash
 cd backend
@@ -141,7 +141,7 @@ npm run dev
 
 ---
 
-### 3️⃣ Setup Frontend
+### 3️. Setup Frontend
 
 ```bash
 cd frontend
@@ -151,27 +151,27 @@ npm run dev
 
 ---
 
-## 🔄 Project Evolution
+##  Project Evolution
 
 This project evolved through multiple stages:
 
-➡️ **Basic Task Manager (HTML/CSS/JS + localStorage)**
-➡️ **Full-Stack App (Node.js + MongoDB)**
-➡️ **Advanced Productivity System (React + Analytics + Streaks)**
+ **Basic Task Manager (HTML/CSS/JS + localStorage)**
+ **Full-Stack App (Node.js + MongoDB)**
+ **Advanced Productivity System (React + Analytics + Streaks)**
 
 ---
 
-## 💡 Future Enhancements
+##  Future Enhancements
 
-* 🤖 AI-based task recommendations
-* 🔔 Smart notifications & reminders
-* 🤝 Team collaboration features
-* 📊 Advanced productivity insights
-* 📱 Mobile app version
+*  AI-based task recommendations
+*  Smart notifications & reminders
+*  Team collaboration features
+*  Advanced productivity insights
+*  Mobile app version
 
 ---
 
-## 🧠 Learning Outcomes
+## Learning Outcomes
 
 * Built a complete **MERN stack application**
 * Designed scalable backend architecture
@@ -181,12 +181,12 @@ This project evolved through multiple stages:
 
 ---
 
-## 📌 Author
+## Author
 
-**Your Name**
+**Built by Nidhi**
 
 ---
 
-## ⭐ If you like this project
+## If you like this project
 
 Give it a ⭐ on GitHub — it really helps!
