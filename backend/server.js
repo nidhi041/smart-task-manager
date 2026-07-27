@@ -17,22 +17,25 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,                           // override via env var if needed
 ].filter(Boolean); // remove any undefined/null values
 
-// Middleware
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Allow server-to-server requests (no origin) and whitelisted origins
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error(`Not allowed by CORS: ${origin}`));
-      }
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow server-to-server requests (no origin) and whitelisted origins
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Not allowed by CORS: ${origin}`));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
+
+// Explicitly handle ALL preflight (OPTIONS) requests — must be before routes
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
 
