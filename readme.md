@@ -8,7 +8,11 @@ Originally built using **HTML, CSS, and JavaScript**, this project was later **u
 
 ## Live Demo
 
-*(Add your deployed link here)*
+Frontend: smart-task-manager-six-sigma.vercel.app
+
+Backend: https://smart-task-manager-377a.onrender.com
+
+
 Demo Credentials: *(optional)*
 
 ---
