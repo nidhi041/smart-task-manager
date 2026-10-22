@@ -8,22 +8,35 @@ import taskRoutes from "./routes/taskRoutes.js";
 
 const app = express();
 
-const allowedOrigins = [
+const allowedOrigins = new Set([
   "http://localhost:5173",
   "https://smart-task-manager-six-sigma.vercel.app",
-];
+]);
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+if (process.env.FRONTEND_URL) {
+  allowedOrigins.add(
+    process.env.FRONTEND_URL.trim().replace(/\/+$/, "")
+  );
+}
 
-// Explicit preflight handling
-app.options(/.*/, cors());
+const corsOptions = {
+  origin: (origin, callback) => {
+    console.log("CORS origin:", origin || "(no origin)");
+
+    if (!origin || allowedOrigins.has(origin)) {
+      return callback(null, true);
+    }
+
+    console.error("CORS rejected origin:", origin);
+    return callback(new Error("Origin not allowed by CORS"));
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
+app.options(/.*/, cors(corsOptions));
 
 app.use(express.json());
 
@@ -35,8 +48,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
 
 app.use((err, req, res, next) => {
-  console.error("Server error:", err);
-  res.status(500).json({ message: "Internal server error" });
+  console.error("SERVER ERROR:", err.message);
+
+  res.status(500).json({
+    message: "Internal server error",
+  });
 });
 
 const PORT = process.env.PORT || 5000;
@@ -47,6 +63,6 @@ app.listen(PORT, async () => {
   try {
     await connectDB();
   } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
+    console.error("Database startup failed:", error.message);
   }
 });
